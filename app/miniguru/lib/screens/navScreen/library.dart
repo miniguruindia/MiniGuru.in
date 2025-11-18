@@ -16,7 +16,7 @@ class Library extends StatefulWidget {
 
 class _LibraryState extends State<Library> {
   List<Project> _projects = [];
-  List<Project> _allProjects = []; // Store all projects for current page
+  final List<Project> _allProjects = []; // Store all projects for current page
   List<ProjectCategory> _projectCategory = [];
   bool _loading = true;
   bool _isLoadingMore = false; // Track if we're loading more projects

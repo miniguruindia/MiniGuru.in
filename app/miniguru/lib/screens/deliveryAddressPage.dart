@@ -187,7 +187,7 @@ class _DeliveryAddressPageState extends State<DeliveryAddressPage> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: buttonBlack),
+          borderSide: const BorderSide(color: buttonBlack),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),

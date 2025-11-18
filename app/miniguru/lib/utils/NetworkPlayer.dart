@@ -133,7 +133,7 @@ class _NetworkVideoPlayerState extends State<NetworkVideoPlayer> {
                     child: VideoProgressIndicator(
                       _controller,
                       allowScrubbing: true,
-                      colors: VideoProgressColors(
+                      colors: const VideoProgressColors(
                         playedColor: Colors.blue,
                         bufferedColor: Colors.grey,
                         backgroundColor: Colors.white54,

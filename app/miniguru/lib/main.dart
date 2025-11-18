@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:miniguru/constants.dart';
 import 'package:miniguru/screens/homeScreen.dart';
