@@ -1,0 +1,44 @@
+{
+  "name": "MiniGuru Full Stack Development Environment",
+  // Use the universal image which supports many tools, including Node.js
+  "image": "mcr.microsoft.com/devcontainers/universal:latest",
+
+  "features": {
+    // Install Node.js v20 (modern, stable, and avoids GLIBC errors)
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    // Install the necessary Flutter SDK
+    "ghcr.io/flutter-dev/devcontainers/flutter:latest": {
+      "version": "latest"
+    }
+  },
+
+  // Install VS Code Extensions for all developers using this codespace
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Dart-Code.flutter",
+        "Prisma.prisma-VSCode",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss" // For Next.js/Shadcn UI admin dashboard
+      ]
+    }
+  },
+
+  // Run these commands AFTER the container is created to set up dependencies
+  "postCreateCommand": [
+    // Install backend dependencies and generate Prisma client
+    "npm install --prefix miniguru-codes/backend",
+    "npx prisma generate --schema miniguru-codes/backend/prisma/schema.prisma",
+    // Install admin dashboard dependencies
+    "npm install --prefix miniguru-codes/admin"
+  ],
+
+  // Forward these ports so you can view the backend API and the Flutter app
+  "forwardPorts": [3000, 8080],
+
+  // Start in the miniguru-codes directory for easier access to all sub-folders
+  "workspaceFolder": "/workspaces/MiniGuru-App/miniguru-codes"
+}
