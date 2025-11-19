@@ -1,17 +1,13 @@
 {
   "name": "MiniGuru Full Stack Development Environment (Fixed)",
-  
-  // FIX 1: Change to a more stable base image for combined Node.js/tools environment.
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20", 
-  
+
   "features": {
-    // FIX 2: REMOVE the problematic 'ghcr.io/flutter-dev/devcontainers/flutter:latest' feature.
-    // Node.js is included in the base image, but we'll include the feature for clarity/version pinning.
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
     }
   },
-  
+
   "customizations": {
     "vscode": {
       "extensions": [
@@ -23,33 +19,23 @@
       ]
     }
   },
-  
-  // FIX 3: Manually install Flutter and set the environment path.
+
   "postCreateCommand": [
-    // 1. Manually Install and Setup Flutter SDK (replaces the broken feature)
     "echo 'Installing Flutter SDK...'",
     "git clone https://github.com/flutter/flutter.git -b stable /usr/local/flutter",
-    // Make Flutter tools accessible for subsequent commands and session
     "export PATH=\"$PATH:/usr/local/flutter/bin\"",
-    // Add path permanently to bashrc for future terminal sessions
     "echo 'export PATH=\"$PATH:/usr/local/flutter/bin\"' >> /home/vscode/.bashrc",
-    "/usr/local/flutter/bin/flutter doctor", // Runs doctor to download necessary artifacts
+    "/usr/local/flutter/bin/flutter doctor --web", 
 
-    // 2. Install backend dependencies and generate Prisma client (Relative to workspaceFolder)
     "echo 'Installing Backend dependencies...'",
-    "npm install --prefix backend",
-    "npx prisma generate --schema backend/prisma/schema.prisma", 
-    
-    // 3. Install admin dashboard dependencies
+    "npm install --prefix miniguru-codes/backend",
+    "npx prisma generate --schema miniguru-codes/backend/prisma/schema.prisma", 
+
     "echo 'Installing Admin dependencies...'",
-    "npm install --prefix admin"
+    "npm install --prefix miniguru-codes/admin"
   ],
 
   "forwardPorts": [3000, 8080],
-  
-  // FIX 4: Ensure the path is absolutely correct based on the repository rename
-  "workspaceFolder": "/workspaces/MiniGuru-App/miniguru-codes",
-  
-  // FIX 5: Ensure VS Code opens the correct files/folders to avoid the UI/Explorer error
-  "initializeCommand": "code --install-extension Dart-Code.flutter --install-extension Prisma.prisma-VSCode"
+
+  "workspaceFolder": "/workspaces/MiniGuru-App/miniguru-codes"
 }
